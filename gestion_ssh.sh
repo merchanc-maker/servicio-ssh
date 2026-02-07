@@ -66,6 +66,13 @@ gestionar_logs() {
     fi
 }
 
+# --- FUNCION DE EDITAR ---
+editar_configuracion() {
+    nano sshd_config.pro
+    read -p "¿Reiniciar servicio ahora? (s/n): " reiniciar
+    [ "$reiniciar" == "s" ] && puesta_en_marcha
+}
+
 # --- MENÚ PRINCIPAL ---
 while true; do
     clear
@@ -83,7 +90,7 @@ while true; do
         2)  puesta_en_marcha ;;
         3)  parada ;;
         4)  gestionar_logs ;;
-        5)  ;;
+        5)  editar_configuracion ;;
         6)  ;;
         0) exit 0 ;;
     esac
