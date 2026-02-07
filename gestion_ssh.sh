@@ -46,6 +46,13 @@ puesta_en_marcha() {
     sleep 2 # Pausa de 2 segundos para que el mensaje sea visible
 }
 
+# --- FUNCION DE PARADA ---
+parada() {
+    docker stop mi-contenedor
+    echo "Contenedor detenido."
+    sleep 2
+}
+
 # --- MENÚ PRINCIPAL ---
 while true; do
     clear
@@ -61,7 +68,7 @@ while true; do
     case $opcion in
         1)  instalacion ;;
         2)  puesta_en_marcha ;;
-        3)  ;;
+        3)  parada ;;
         4)  ;;
         5)  ;;
         6)  ;;
