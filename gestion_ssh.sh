@@ -73,6 +73,13 @@ editar_configuracion() {
     [ "$reiniciar" == "s" ] && puesta_en_marcha
 }
 
+
+eliminar() {
+    docker rm -f mi-contenedor
+    echo "Servicio eliminado"
+    sleep 2
+}
+
 # --- MENÚ PRINCIPAL ---
 while true; do
     clear
@@ -86,12 +93,12 @@ while true; do
     echo " 0) SALIR"
     read -p "Seleccione: " opcion
     case $opcion in
-        1)  instalacion ;;
-        2)  puesta_en_marcha ;;
-        3)  parada ;;
-        4)  gestionar_logs ;;
-        5)  editar_configuracion ;;
-        6)  ;;
+        1) instalacion ;;
+        2) puesta_en_marcha ;;
+        3) parada ;;
+        4) gestionar_logs ;;
+        5) editar_configuracion ;;
+        6) eliminar ;;
         0) exit 0 ;;
     esac
 done
