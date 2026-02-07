@@ -20,7 +20,7 @@ mostrar_info_sistema() {
     echo "============================================================"
 }
 
-# --- FUNCION DE INSTALACIÓN  ---
+# --- FUNCION DE INSTALACIÓN ---
 instalacion() {
     echo "--- Menú de Instalación ---"
     echo "1) Manual (Paquete) | 2) Docker"
@@ -37,6 +37,15 @@ instalacion() {
     fi
 }
 
+# --- FUNCION DE PUESTA EN MARCHA ---
+puesta_en_marcha() {
+    echo "Reiniciando contenedor..."
+    docker rm -f mi-contenedor 2>/dev/null
+    docker build -t mi-servidor-ssh .
+    docker run -d -p 2222:2222 --name mi-contenedor mi-servidor-ssh
+    sleep 2 # Pausa de 2 segundos para que el mensaje sea visible
+}
+
 # --- MENÚ PRINCIPAL ---
 while true; do
     clear
@@ -51,7 +60,7 @@ while true; do
     read -p "Seleccione: " opcion
     case $opcion in
         1)  instalacion ;;
-        2)  ;;
+        2)  puesta_en_marcha ;;
         3)  ;;
         4)  ;;
         5)  ;;
