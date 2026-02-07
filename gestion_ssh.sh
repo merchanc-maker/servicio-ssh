@@ -53,6 +53,19 @@ parada() {
     sleep 2
 }
 
+# --- FUNCION DE LOGS ---
+gestionar_logs() {
+    echo "1) Tiempo real | 2) Búsqueda"
+    read -p "Opción: " opcion
+    if [ "$opcion" == "1" ]; then
+        docker logs -f mi-contenedor
+    else
+        read -p "Palabra a buscar: " palabra
+        docker logs mi-contenedor | grep -i "$palabra"
+        read -p "Presiona Enter..."
+    fi
+}
+
 # --- MENÚ PRINCIPAL ---
 while true; do
     clear
@@ -69,7 +82,7 @@ while true; do
         1)  instalacion ;;
         2)  puesta_en_marcha ;;
         3)  parada ;;
-        4)  ;;
+        4)  gestionar_logs ;;
         5)  ;;
         6)  ;;
         0) exit 0 ;;
