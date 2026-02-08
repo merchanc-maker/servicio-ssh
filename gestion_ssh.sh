@@ -62,6 +62,11 @@ puesta_en_marcha() {
 parada() {
     docker stop mi-contenedor
     echo "Contenedor detenido."
+
+    echo "Creando copia de seguridad de los datos..."
+    tar -cvfz backup_ssh_$(date +%Y%m%d).tar.gz ~/datos_ssh_contenedor
+    echo "Servicio detenido y backup realizado."
+
     sleep 2
 }
 
