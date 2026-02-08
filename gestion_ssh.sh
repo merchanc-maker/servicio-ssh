@@ -39,10 +39,22 @@ instalacion() {
 
 # --- FUNCION DE PUESTA EN MARCHA ---
 puesta_en_marcha() {
-    echo "Reiniciando contenedor..."
+    echo "Reiniciando contenedor con persistencia de datos..."
+
     docker rm -f mi-contenedor 2>/dev/null
+
+    # Creamos la carpeta en tu PC si no existe para evitar errores
+    mkdir -p ~/datos_ssh_contenedor
+
     docker build -t mi-servidor-ssh .
-    docker run -d -p 2222:2222 --name mi-contenedor mi-servidor-ssh
+
+    # Añadimos el parámetro -v para los datos de /home
+    docker run -d \
+      -p 2222:2222 \
+      --name mi-contenedor \
+      -v ~/datos_ssh_contenedor:/home \
+      mi-servidor-ssh
+
     sleep 2 # Pausa de 2 segundos para que el mensaje sea visible
 }
 
