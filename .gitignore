@@ -1,0 +1,11 @@
+# Ignorar copias de seguridad de nuestro script
+*.tar.gz
+
+# Ignorar logs locales que pueda crear el sistema
+*.log
+
+# Por seguridad, nunca subir carpetas de datos locales si son privadas
+datos_ssh_contenedor/
+
+# Ignorar archivos ocultos del sistema (como los de MacOS o carpetas .DS_Store)
+.DS_Store
