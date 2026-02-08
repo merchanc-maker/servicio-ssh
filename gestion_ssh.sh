@@ -73,12 +73,41 @@ editar_configuracion() {
     [ "$reiniciar" == "s" ] && puesta_en_marcha
 }
 
-
+# --- FUNCION DE ELIMINAR ---
 eliminar() {
     docker rm -f mi-contenedor
     echo "Servicio eliminado"
     sleep 2
 }
+
+# --- FUNCIÓN DE AYUDA ---
+mostrar_ayuda() {
+    echo "Uso: $0 {instalar|start|stop|logs|config|eliminar|help}"
+    echo
+    echo "Comandos disponibles:"
+    echo "  instalar   → Instala y configura el entorno"
+    echo "  start      → Inicia el contenedor"
+    echo "  stop       → Detiene el contenedor"
+    echo "  logs       → Muestra los logs"
+    echo "  config     → Edita la configuración"
+    echo "  eliminar   → Elimina el contenedor"
+    echo "  help, -h   → Muestra esta ayuda"
+}
+
+# --- LÓGICA DE PARÁMETROS DIRECTOS ---
+if [ ! -z "$1" ]; then
+    case "$1" in
+        instalar) instalacion ; exit 0 ;;
+        start) puesta_en_marcha ; exit 0 ;;
+        stop) parada ; exit 0 ;;
+        logs) gestionar_logs ; exit 0 ;;
+        config) editar_configuracion ; exit 0 ;;
+        eliminar) docker rm -f mi-contenedor 2>/dev/null ; exit 0 ;;
+        help|-h|--help) mostrar_ayuda ; exit 0 ;;
+        *) echo "Comando no válido" ; mostrar_ayuda ; exit 1 ;;
+    esac
+fi
+
 
 # --- MENÚ PRINCIPAL ---
 while true; do
